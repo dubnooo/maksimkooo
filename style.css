@@ -1,22 +1,101 @@
-body {
+/* ==========================================================================
+   1. Базові скидання та глобальні налаштування
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align:center ;
-  
 }
-ul{
-   
+
+/* Анімований фоновий градієнт на весь екран */
+body {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Вирівнювання всього контенту по центру */
+    justify-content: flex-start;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ==========================================================================
+   2. Шапка та Меню (Header / Nav)
+   ========================================================================== */
+header {
+    width: 100%;
+    max-width: 1200px;
+    background: linear-gradient(rgba(108, 92, 231, 0.8), rgba(162, 155, 254, 0.9)), 
+                url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+    border-radius: 24px;
+    margin-bottom: 40px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+header p {
+    font-size: 1.3rem;
+    opacity: 0.95;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Акуратне меню */
+ul {
     border-radius: 50px;
     display: flex;
-    justify-content:space-around;
- background: linear-gradient(-60deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);    
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 15px 30px;
+    margin: 30px auto 0;
+    max-width: 600px;
+    background: linear-gradient(-60deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
+
+/* ==========================================================================
+   3. Секції, Заголовки та Неон
+   ========================================================================== */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    position: relative;
+}
+
+/* Магічний рожевий неон */
 .neon-text {
     color: #ffccff;
+    text-align: center;
     text-shadow: 
         0 0 5px #fff,
         0 0 10px #fff,
@@ -24,204 +103,152 @@ ul{
         0 0 40px #ff00de,
         0 0 80px #ff00de;
 }
-.card-content{
-border: 10px solid white;
 
-padding-top: 50px;
-padding-bottom: 50px;
-
-
- 
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #ffffff;
+    margin: 15px auto 0;
+    border-radius: 2px;
+    box-shadow: 0 0 8px #ff00de;
 }
 
+/* ==========================================================================
+   4. Ідеально центрована сітка та Картки
+   ========================================================================== */
+.grid {
+    display: grid;
+    /* Створює адаптивні колонки, вирівняні по центру */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: center;
+    align-items: stretch;
+}
 
+.card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрує вміст всередині картки */
+    text-align: center;
+}
 
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(255, 0, 222, 0.2);
+}
 
- body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradientShift 10s ease infinite;
-  }
-  @keyframes gradientShift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-    * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+/* Фіксація картинки (один розмір, ідеальне кадрування) */
+.card-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
 
-        body {
-            background-color: #f0f2f5;
-            color: #333;
-            line-height: 1.6;
-        }
+/* Контент картки */
+.card-content {
+    padding: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрує елементи контенту */
+    width: 100%;
+}
 
-        /* Головний банер з фоновою картинкою */
-        header {
-            background: linear-gradient(rgba(108, 92, 231, 0.8), rgba(162, 155, 254, 0.9)), 
-                        url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 120px 20px;
-        }
+.card-header-box {
+    display: flex;
+    flex-direction: column; /* Змінено на column для кращого центрування тексту та бейджа */
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
 
-        header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+.card h3 {
+    font-size: 1.5rem;
+    color: #2d3436;
+}
 
-        header p {
-            font-size: 1.3rem;
-            opacity: 0.95;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+.badge {
+    background: #ffeaa7;
+    color: #d63031;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
+.card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+    max-width: 90%;
+}
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            font-size: 2.2rem;
-            color: #2d3436;
-            position: relative;
-        }
+/* Блок стратегії */
+.strategy-box {
+    background: #f8f9fa;
+    border-left: 4px solid #6c5ce7;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 4px 12px 12px 4px;
+    text-align: left; /* Текст стратегії зручніше читати зліва */
+    width: 100%;
+}
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: #6c5ce7;
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
+.strategy-box strong {
+    color: #6c5ce7;
+    display: block;
+    margin-bottom: 6px;
+}
 
-        /* Сітка карток */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
+/* Кнопки */
+.btn-help {
+    width: 100%;
+    max-width: 240px; /* Кнопка не розтягується на всю картку, а виглядає акуратно по центру */
+    margin-top: auto; 
+    text-align: center;
+    background: #6c5ce7;
+    color: white;
+    padding: 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
 
-        .card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden; /* Щоб картинка не вилізала за закруглені кути */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
+.btn-help:hover {
+    background: #5b4cc4;
+    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+}
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(108, 92, 231, 0.15);
-        }
+.btn-help:active {
+    transform: scale(0.97);
+}
 
-        /* Контейнер для картинки в картці */
-        .card-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover; /* Картинка заповнює блок без деформації */
-        }
-
-        /* Контент всередині картки */
-        .card-content {
-            padding: 25px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-header-box {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .card h3 {
-            font-size: 1.4rem;
-            color: #2d3436;
-        }
-
-        .badge {
-            background: #ffeaa7;
-            color: #d63031;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .card p {
-            font-size: 0.95rem;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .strategy-box {
-            background: #f9f9fb;
-            border-left: 4px solid #6c5ce7;
-            padding: 10px 15px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .strategy-box strong {
-            color: #6c5ce7;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .btn-help {
-            margin-top: auto; /* Притискає кнопку до низу, якщо текст різної довжини */
-            text-align: center;
-            background: #6c5ce7;
-            color: white;
-            padding: 12px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.2s, transform 0.1s;
-        }
-
-        .btn-help:hover {
-            background: #5b4cc4;
-        }
-
-        .btn-help:active {
-            transform: scale(0.98);
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #2d3436;
-            color: #a0a0a0;
-            margin-top: 80px;
-            font-size: 0.9rem;
-        }
-
+/* ==========================================================================
+   5. Підвал (Footer)
+   ========================================================================== */
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 35px;
+    background: #2d3436;
+    color: #b2bec3;
+    margin-top: 80px;
+    border-radius: 24px 24px 0 0;
+    font-size: 0.95rem;
+}
